@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [evgeniy tsydrenkov](https://up.htmlacademy.ru/javascript/19/user/1336611).
-* Наставник: `Неизвестно`.
+* Наставник: `Анатолий Ликутин `.
 
 ---
 
