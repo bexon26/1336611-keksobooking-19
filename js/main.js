@@ -90,14 +90,14 @@ var renderСard = function (card) {
   }
 
   var colRoom = cardElement.querySelector('.popup__text--capacity');
-  if (card.offer.rooms || card.offer.guests) {
+  if (card.offer.rooms && card.offer.guests) {
     colRoom.textContent = card.offer.rooms + ' комнаты для ' + card.offer.guests + ' гостей';
   } else {
     colRoom.classList.add('visually-hidden');
   }
 
   var time = cardElement.querySelector('.popup__text--time');
-  if (card.offer.checkin || card.offer.checkout) {
+  if (card.offer.checkin && card.offer.checkout) {
     time.textContent = ' Заезд после ' + card.offer.checkin + ', выезд до ' + card.offer.checkout;
   } else {
     time.classList.add('visually-hidden');
@@ -174,9 +174,7 @@ var renderСard = function (card) {
     photos.classList.add('visually-hidden');
   }
 
-
   var avatar = cardElement.querySelector('.popup__avatar');
-  avatar.textContent = card.author.avatar;
   if (card.author.avatar) {
     avatar.textContent = card.author.avatar;
   } else {
