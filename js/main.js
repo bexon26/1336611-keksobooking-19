@@ -274,4 +274,11 @@ formGuest.addEventListener('change', function () {
   validate();
 });
 
-adForm.setAttribute('action', 'https://js.dump.academy/keksobooking');
+//adForm.setAttribute('action', 'https://js.dump.academy/keksobooking');
+var formButton = document.querySelector('.ad-form__submit');
+formButton.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+  console.log('lfkdlkf');
+
+
+});
