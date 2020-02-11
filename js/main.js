@@ -255,22 +255,27 @@ var validate = function () {
   if (formRoom.value === '100' && formGuest.value === '0') {
     formRoom.style.border = 'none';
     formGuest.style.border = 'none';
+    formRoom.setCustomValidity('');
   } else if ((formRoom.value >= formGuest.value) && formGuest.value !== '0' && formRoom.value !== '100') {
     formRoom.style.border = 'none';
     formGuest.style.border = 'none';
-
+    formRoom.setCustomValidity('');
   } else {
     formRoom.style.border = '2px solid red';
     formGuest.style.border = '2px solid red';
+    formRoom.setCustomValidity('Выберите правильное количество комнат');
   }
 };
 
 formRoom.addEventListener('change', function () {
   validate();
+
+
 });
 
 formGuest.addEventListener('change', function () {
   validate();
+
 });
 
 adForm.setAttribute('action', 'https://js.dump.academy/keksobooking');
