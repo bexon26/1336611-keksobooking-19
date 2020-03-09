@@ -11,22 +11,37 @@ var similarNoticeTemplate = document.querySelector('#pin')
 // Фунция отрисовки одного объявления
 var renderNotice = function (notice) {
   var noticeElement = similarNoticeTemplate.cloneNode(true);
-  noticeElement.style = notice.offer.address;
+  noticeElement.style = 'left:' + notice.location.x + 'px; ' + 'top:' + notice.location.y + 'px;';
   var imgNotice = noticeElement.children[0];
   imgNotice.src = notice.author.avatar;
   imgNotice.alt = notice.offer.title;
   return noticeElement;
 };
 
-var fragment = document.createDocumentFragment();
+window.load(function (notices) {
+  var fragment = document.createDocumentFragment();
+  for (var n = 0; n < notices.length; n++) {
+    fragment.appendChild(renderNotice(notices[n]));
+  }
+  similarListElement.appendChild(fragment);
+}, errorHandler);
 
-for (var n = 0; n < window.data.notices.length; n++) {
-  fragment.appendChild(renderNotice(window.data.notices[n]));
-}
-
-similarListElement.appendChild(fragment);
 
 var fragmentCard = document.createDocumentFragment();
 fragmentCard.appendChild(window.card.renderСard(window.data.notices[0]));
 var filtersContainer = similarCardListElement.querySelector('.map__filters-container');
 filtersContainer.before(fragmentCard);
+
+var errorHandler = function (errorMessage) {
+  var node = document.createElement('div');
+  node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+  node.style.position = 'absolute';
+  node.style.left = 0;
+  node.style.right = 0;
+  node.style.fontSize = '30px';
+
+  node.textContent = errorMessage;
+  document.body.insertAdjacentElement('afterbegin', node);
+};
+
+
