@@ -17,14 +17,33 @@
   mapPinMain.addEventListener('mousedown', function (evt) {
     if (evt.button === 0) {
       removeFormDisabled();
+
     }
 
   });
   mapPinMain.addEventListener('keydown', function (evt) {
     if (evt.key === 'Enter') {
       removeFormDisabled();
+
     }
   });
+
+  var filterChangeHandler = function (evt) {
+window.viewCard();
+    if (evt.target && evt.target.matches('button')) {
+      console.log('press');
+
+    }
+  }
+
+  var mapPins = document.querySelector('.map__pins');
+    mapPins.addEventListener('click', function (evt) {
+      if (evt.target.matches('button')) {
+      console.log('press');
+    }
+    });
+
+
 
   // Валидация
 
