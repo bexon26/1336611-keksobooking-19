@@ -5,6 +5,7 @@
     .content;
   // Фунция отрисовки одной карточки
   var renderСard = function (card) {
+
     var cardElement = similarCardTemplate.cloneNode(true);
     var title = cardElement.querySelector('.popup__title');
     if (card.offer.title) {
