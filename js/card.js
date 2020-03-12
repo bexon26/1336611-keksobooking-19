@@ -5,6 +5,7 @@
     .content;
   // Фунция отрисовки одной карточки
   var renderСard = function (card) {
+
     var cardElement = similarCardTemplate.cloneNode(true);
     var title = cardElement.querySelector('.popup__title');
     if (card.offer.title) {
@@ -108,7 +109,7 @@
     if (card.offer.photos.length) {
       for (var i = 0; i < card.offer.photos.length; i++) {
         if (!i) {
-          photos.children[0].src = card.offer.photos[0];
+          photos.children[0].src = card.offer.photos[i];
         } else {
           var photo = photos.children[0].cloneNode(true);
           photo.src = card.offer.photos[i];
