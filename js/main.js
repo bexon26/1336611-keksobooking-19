@@ -5,32 +5,43 @@ var similarListElement = document.querySelector('.map__pins');
 // Находим блок куда будем вставлять блок с информацией
 var similarCardListElement = document.querySelector('.map');
 var similarNoticeTemplate = document.querySelector('#pin')
-     .content
-     .querySelector('.map__pin');
+  .content
+  .querySelector('.map__pin');
 
 // Фунция отрисовки одного объявления
-var renderNotice = function (notice) {
+var renderNotice = function (notice, id) {
   var noticeElement = similarNoticeTemplate.cloneNode(true);
   noticeElement.style = 'left:' + notice.location.x + 'px; ' + 'top:' + notice.location.y + 'px;';
+  noticeElement.setAttribute('id', id);
   var imgNotice = noticeElement.children[0];
   imgNotice.src = notice.author.avatar;
   imgNotice.alt = notice.offer.title;
+  noticeElement.setAttribute('tabindex', 0);
   return noticeElement;
 };
 
-window.load(function (notices) {
+
+// Загрузка данных и отрисовка пинов
+var notices = [];
+window.load(function (data) {
+  notices = data;
   var fragment = document.createDocumentFragment();
+
   for (var n = 0; n < notices.length; n++) {
-    fragment.appendChild(renderNotice(notices[n]));
+    fragment.appendChild(renderNotice(notices[n], n));
   }
+
   similarListElement.appendChild(fragment);
 }, errorHandler);
 
+// Отрисовка карточек
+window.viewCard = function (id) {
+  var fragmentCard = document.createDocumentFragment();
+  fragmentCard.appendChild(window.card.renderСard(notices[id]));
+  var filtersContainer = similarCardListElement.querySelector('.map__filters-container');
+  filtersContainer.before(fragmentCard);
 
-var fragmentCard = document.createDocumentFragment();
-fragmentCard.appendChild(window.card.renderСard(window.data.notices[0]));
-var filtersContainer = similarCardListElement.querySelector('.map__filters-container');
-filtersContainer.before(fragmentCard);
+};
 
 var errorHandler = function (errorMessage) {
   var node = document.createElement('div');
@@ -39,7 +50,6 @@ var errorHandler = function (errorMessage) {
   node.style.left = 0;
   node.style.right = 0;
   node.style.fontSize = '30px';
-
   node.textContent = errorMessage;
   document.body.insertAdjacentElement('afterbegin', node);
 };
