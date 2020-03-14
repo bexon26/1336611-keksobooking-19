@@ -1,8 +1,7 @@
 'use strict';
-
+// validation.js
 (function () {
 
-  // validation.js
   // Валидация
   var formRoom = document.getElementById('room_number');
   var formGuest = document.getElementById('capacity');
@@ -40,7 +39,7 @@
   formRoom.addEventListener('change', validateRoom);
   formGuest.addEventListener('change', validateRoom);
 
-  // Валидация адреса
+  // Валидация адреса, цены
   window.form.adForm.addEventListener('click', function () {
     if (formAddress.value === '') {
       formAddress.setCustomValidity('Заполните поле');
@@ -52,7 +51,10 @@
     } else {
       formTitle.setCustomValidity('');
     }
-
+    if (formPrice.value === '') {
+      formPrice.setCustomValidity('Заполните поле в диапазоне от 0 до 1000000 символов');
+    }
+    validateRoom();
   });
 
   // Валидация типа и цены
@@ -100,9 +102,7 @@
           formPrice.setAttribute('placeholder', formPrice.value);
         }
         break;
-
     }
-
   };
 
   formType.addEventListener('change', validateType);
@@ -127,12 +127,10 @@
       case '14:00': formTimeIn.value = '14:00';
         break;
     }
-
   };
 
   formTimeIn.addEventListener('change', validateTimeIn);
   formTimeOut.addEventListener('change', validateTimeOut);
-
 
 
   window.form.adForm.setAttribute('action', 'https://js.dump.academy/keksobooking');
