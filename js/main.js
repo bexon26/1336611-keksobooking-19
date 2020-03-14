@@ -20,17 +20,22 @@ var renderNotice = function (notice, id) {
   return noticeElement;
 };
 
-
-// Загрузка данных и отрисовка пинов
+// Загрузка данных
 var notices = [];
 window.load(function (data) {
   notices = data;
+  window.viewPin(data);
+}, errorHandler);
+
+// отрисовка пинов
+window.viewPin = function (noticeArrays) {
+  // notices = noticeArrays;
   var fragment = document.createDocumentFragment();
-  for (var n = 0; n < notices.length; n++) {
-    fragment.appendChild(renderNotice(notices[n], n));
+  for (var n = 0; n < noticeArrays.length && n < 5; n++) {
+    fragment.appendChild(renderNotice(noticeArrays[n], n));
   }
   similarListElement.appendChild(fragment);
-}, errorHandler);
+};
 
 // Отрисовка карточек
 window.viewCard = function (id) {
@@ -50,6 +55,10 @@ var errorHandler = function (errorMessage) {
   node.style.fontSize = '30px';
   node.textContent = errorMessage;
   document.body.insertAdjacentElement('afterbegin', node);
+};
+
+window.filterMap = function (prorerty, value) {
+  window.filter.updatePins(notices, prorerty, value);
 };
 
 
