@@ -26,11 +26,9 @@ var notices = [];
 window.load(function (data) {
   notices = data;
   var fragment = document.createDocumentFragment();
-
   for (var n = 0; n < notices.length; n++) {
     fragment.appendChild(renderNotice(notices[n], n));
   }
-
   similarListElement.appendChild(fragment);
 }, errorHandler);
 

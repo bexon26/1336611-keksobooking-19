@@ -56,7 +56,7 @@
         features[i].classList.add('visually-hidden');
       }
 
-      for (var i = 0; i < card.offer.features.length; i++) {
+      for (var j = 0; j < card.offer.features.length; j++) {
         switch (card.offer.features[i]) {
           case 'wifi':
             var feature = cardElement.querySelector('.popup__feature--wifi');
@@ -107,7 +107,7 @@
     var photos = cardElement.querySelector('.popup__photos');
 
     if (card.offer.photos.length) {
-      for (var i = 0; i < card.offer.photos.length; i++) {
+      for (var k = 0; k < card.offer.photos.length; k++) {
         if (!i) {
           photos.children[0].src = card.offer.photos[i];
         } else {
@@ -157,7 +157,7 @@
   };
 
   window.card = {
-    renderСard: renderСard
+    renderСard: renderСard,
   };
 
 })();

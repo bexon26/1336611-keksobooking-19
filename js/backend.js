@@ -1,6 +1,26 @@
 'use strict';
 // Модуль backend.js
 
+
+(function () {
+  var URL = 'https://js.dump.academy/keksobooking';
+  window.save = function (data, onload) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      onload(xhr.response);
+      if (xhr.status === 200) {
+        window.error.viewSucces();
+      } else {
+        window.error.viewError();
+      }
+    });
+
+    xhr.open('POST', URL);
+    xhr.send(data);
+  };
+})();
+
 (function () {
   var URL = 'https://js.dump.academy/keksobooking/data';
   window.load = function (onLoad, onError) {
@@ -27,3 +47,4 @@
     xhr.send();
   };
 })();
+
