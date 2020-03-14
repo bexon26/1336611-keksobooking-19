@@ -1,6 +1,20 @@
 'use strict';
 // Модуль backend.js
 
+
+(function () {
+  var URL = 'https://js.dump.academy/keksobooking';
+  window.save = function (data, onload, onError) {
+    var xhr = new XMLHttpRequest();
+    xhr.responseType = 'json';
+    xhr.addEventListener('load', function () {
+      onload(xhr.response);
+    });
+    xhr.open('POST', URL);
+    xhr.send(data);
+  };
+})();
+
 (function () {
   var URL = 'https://js.dump.academy/keksobooking/data';
   window.load = function (onLoad, onError) {
@@ -27,3 +41,4 @@
     xhr.send();
   };
 })();
+

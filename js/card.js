@@ -157,7 +157,7 @@
   };
 
   window.card = {
-    renderСard: renderСard
+    renderСard: renderСard,
   };
 
 })();

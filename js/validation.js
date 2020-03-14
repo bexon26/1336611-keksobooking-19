@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
   // validation.js
   // Валидация
   var formRoom = document.getElementById('room_number');
@@ -131,5 +132,8 @@
 
   formTimeIn.addEventListener('change', validateTimeIn);
   formTimeOut.addEventListener('change', validateTimeOut);
+
+
+
   window.form.adForm.setAttribute('action', 'https://js.dump.academy/keksobooking');
 })();

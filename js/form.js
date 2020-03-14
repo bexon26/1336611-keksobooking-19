@@ -3,6 +3,17 @@
 (function () {
   // form.js
   var adForm = document.querySelector('.ad-form');
+  adForm.addEventListener('submit', function (evt) {
+
+    window.save(new FormData(adForm), function (response) {
+      document.querySelector('.map').classList.add('map--faded');
+      adForm.classList.add('ad-form--disabled');
+      adForm.reset();
+      window.error.viewError();
+      console.log(evt);
+    });
+    evt.preventDefault();
+  });
   var mapPinMain = document.querySelector('.map__pin--main');
   var topMain = Number(mapPinMain.style.top.slice(0, -2));
   var leftMain = Number(mapPinMain.style.left.slice(0, -2));
@@ -71,5 +82,6 @@
 
   window.form = {
     adForm: adForm,
+    removeFormDisabled: removeFormDisabled,
   };
 })();
