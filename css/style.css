@@ -318,7 +318,7 @@ fieldset {
           transform: translate(-50%, -30px);
 }
 
-.map__pin--main text {
+. text {
   font-size: 7px;
   font-weight: 700;
 

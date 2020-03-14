@@ -1,5 +1,5 @@
 'use strict';
-// Модуль errorMessage.js
+// Модуль error.js
 (function () {
   var similarErrorTemplate = document.querySelector('#error')
     .content;
@@ -28,7 +28,6 @@
 
   var viewSucces = function () {
     var successElement = similarSuccesTemplate.cloneNode(true);
-    // var successButton = successElement.querySelector('.success__button');
     var fragmentSucces = document.createDocumentFragment();
 
     fragmentSucces.appendChild(successElement);
@@ -36,9 +35,7 @@
     mainContainer.appendChild(fragmentSucces);
 
     var successBlock = mainContainer.querySelector('.success');
-    // successButton.addEventListener('click', function (evt) {
-    //   successBlock.style.display = 'none';
-    // });
+
     mainContainer.addEventListener('keydown', function (evt) {
       if (evt.key === 'Escape') {
         mainContainer.removeChild(successBlock);
