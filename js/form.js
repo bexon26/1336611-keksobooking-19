@@ -81,5 +81,6 @@
   window.form = {
     adForm: adForm,
     removeFormDisabled: removeFormDisabled,
+    closeCard: closeCard
   };
 })();

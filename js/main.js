@@ -57,8 +57,8 @@ var errorHandler = function (errorMessage) {
   document.body.insertAdjacentElement('afterbegin', node);
 };
 
-window.filterMap = function (prorerty, value) {
-  window.filter.updatePins(notices, prorerty, value);
+window.filterMap = function (prorertyes, value) {
+  window.filter.updatePins(notices, prorertyes, value);
 };
 
 
