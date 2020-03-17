@@ -4,6 +4,8 @@
   // form.js
   var adForm = document.querySelector('.ad-form');
   var fieldInputs = document.querySelectorAll('fieldset');
+
+  var adFormReset = document.querySelector('.ad-form__reset');
   var mapFilters = document.querySelectorAll('.map__filter');
   var mapFeatureForm = document.querySelector('.map__features');
   var mapFeatures = mapFeatureForm.querySelectorAll('.map__checkbox');
@@ -92,23 +94,46 @@
     }
   });
 
-  adForm.addEventListener('submit', function (evt) {
-    window.save(new FormData(adForm), function () {
-      document.querySelector('.map').classList.add('map--faded');
-      adForm.classList.add('ad-form--disabled');
-      adForm.reset();
-
-    });
-
-    evt.preventDefault();
+  var pageReset = function () {
+    document.querySelector('.map').classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+    adForm.reset();
     window.filter.removePins();
     fieldPageSwitchOff();
     mapFeatures.forEach(function (element) {
       element.checked = false;
     });
     mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
+    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
+    adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
+    closeCard();
 
+  };
+
+  var fieldReset = function () {
+    adForm.reset();
+    window.filter.removePins();
+    fieldPageSwitchOff();
+    mapFeatures.forEach(function (element) {
+      element.checked = false;
+    });
+    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
+    adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
+    closeCard();
+  };
+
+
+  adForm.addEventListener('submit', function (evt) {
+    window.save(new FormData(adForm), function () {
+    });
+    evt.preventDefault();
+    pageReset();
   });
+
+  adFormReset.addEventListener('click', function (evt) {
+    fieldReset();
+  });
+
   window.form = {
     adForm: adForm,
     removeFormDisabled: removeFormDisabled,
