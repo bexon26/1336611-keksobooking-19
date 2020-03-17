@@ -113,7 +113,6 @@
   var fieldReset = function () {
     adForm.reset();
     window.filter.removePins();
-    fieldPageSwitchOff();
     mapFeatures.forEach(function (element) {
       element.checked = false;
     });
