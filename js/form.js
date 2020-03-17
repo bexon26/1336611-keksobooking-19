@@ -3,21 +3,43 @@
 (function () {
   // form.js
   var adForm = document.querySelector('.ad-form');
-
+  var fieldInputs = document.querySelectorAll('fieldset');
+  var mapFilters = document.querySelectorAll('.map__filter');
+  var mapFeatureForm = document.querySelector('.map__features');
+  var mapFeatures = mapFeatureForm.querySelectorAll('.map__checkbox');
   var mapPinMain = document.querySelector('.map__pin--main');
   var topMain = Number(mapPinMain.style.top.slice(0, -2));
   var leftMain = Number(mapPinMain.style.left.slice(0, -2));
   adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
 
+  var fieldPageSwitchOff = function () {
+    fieldInputs.forEach(function (element) {
+      element.setAttribute('disabled', false);
+    });
+    mapFilters.forEach(function (element) {
+      element.setAttribute('disabled', false);
+    });
+
+  };
+  fieldPageSwitchOff();
+  console.log(mapFilters);
+
   var removeFormDisabled = function () {
     document.querySelector('.map').classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
     adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
+    fieldInputs.forEach(function (element) {
+      element.removeAttribute('disabled');
+    });
+    mapFilters.forEach(function (element) {
+      element.removeAttribute('disabled');
+    });
   };
 
   mapPinMain.addEventListener('mousedown', function (evt) {
     if (evt.button === 0) {
       removeFormDisabled();
+      window.viewPin(window.notices);
     }
   });
 
@@ -75,8 +97,17 @@
       document.querySelector('.map').classList.add('map--faded');
       adForm.classList.add('ad-form--disabled');
       adForm.reset();
+
     });
+
     evt.preventDefault();
+    window.filter.removePins();
+    fieldPageSwitchOff();
+    mapFeatures.forEach(function (element) {
+      element.checked = false;
+    });
+    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
+
   });
   window.form = {
     adForm: adForm,

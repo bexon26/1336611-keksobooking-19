@@ -8,6 +8,8 @@ var similarNoticeTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 
+
+
 // Фунция отрисовки одного объявления
 var renderNotice = function (notice) {
   var noticeElement = similarNoticeTemplate.cloneNode(true);
@@ -24,11 +26,11 @@ var renderNotice = function (notice) {
 var notices = [];
 window.load(function (data) {
 
-  notices = data;
+  window.notices = data;
   for (var i = 0; i < notices.length; i++) {
     notices[i].id = i;
   }
-  window.viewPin(data);
+
 }, errorHandler);
 
 // отрисовка пинов
@@ -60,8 +62,8 @@ var errorHandler = function (errorMessage) {
   document.body.insertAdjacentElement('afterbegin', node);
 };
 
-window.filterMap = function (prorertyes, value) {
-  window.filter.updatePins(notices, prorertyes, value);
+window.filterMap = function () {
+  window.filter.updatePins(notices);
 };
 
 
