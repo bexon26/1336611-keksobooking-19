@@ -9,10 +9,10 @@ var similarNoticeTemplate = document.querySelector('#pin')
   .querySelector('.map__pin');
 
 // Фунция отрисовки одного объявления
-var renderNotice = function (notice, id) {
+var renderNotice = function (notice) {
   var noticeElement = similarNoticeTemplate.cloneNode(true);
   noticeElement.style = 'left:' + notice.location.x + 'px; ' + 'top:' + notice.location.y + 'px;';
-  noticeElement.setAttribute('id', id);
+  noticeElement.setAttribute('id', notice.id);
   var imgNotice = noticeElement.children[0];
   imgNotice.src = notice.author.avatar;
   imgNotice.alt = notice.offer.title;
@@ -23,16 +23,19 @@ var renderNotice = function (notice, id) {
 // Загрузка данных
 var notices = [];
 window.load(function (data) {
+
   notices = data;
+  for (var i = 0; i < notices.length; i++) {
+    notices[i].id = i;
+  }
   window.viewPin(data);
 }, errorHandler);
 
 // отрисовка пинов
 window.viewPin = function (noticeArrays) {
-  // notices = noticeArrays;
   var fragment = document.createDocumentFragment();
   for (var n = 0; n < noticeArrays.length && n < 5; n++) {
-    fragment.appendChild(renderNotice(noticeArrays[n], n));
+    fragment.appendChild(renderNotice(noticeArrays[n]));
   }
   similarListElement.appendChild(fragment);
 };

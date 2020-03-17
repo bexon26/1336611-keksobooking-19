@@ -7,6 +7,9 @@
   var renderСard = function (card) {
 
     var cardElement = similarCardTemplate.cloneNode(true);
+
+
+
     var title = cardElement.querySelector('.popup__title');
     if (card.offer.title) {
       title.textContent = card.offer.title;
@@ -121,11 +124,7 @@
     }
 
     var avatar = cardElement.querySelector('.popup__avatar');
-    if (card.author.avatar) {
-      avatar.textContent = card.author.avatar;
-    } else {
-      avatar.classList.add('visually-hidden');
-    }
+    avatar.setAttribute('src', card.author.avatar);
 
     return cardElement;
   };
