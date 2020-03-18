@@ -24,7 +24,6 @@
 
   };
   fieldPageSwitchOff();
-  console.log(mapFilters);
 
   var removeFormDisabled = function () {
     document.querySelector('.map').classList.remove('map--faded');
@@ -95,6 +94,7 @@
   });
 
   var pageReset = function () {
+
     document.querySelector('.map').classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
     adForm.reset();
@@ -113,6 +113,7 @@
   var fieldReset = function () {
     adForm.reset();
     window.filter.removePins();
+    window.viewPin(window.notices);
     mapFeatures.forEach(function (element) {
       element.checked = false;
     });
@@ -130,6 +131,7 @@
   });
 
   adFormReset.addEventListener('click', function (evt) {
+    evt.preventDefault();
     fieldReset();
   });
 
