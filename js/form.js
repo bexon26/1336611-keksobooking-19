@@ -4,7 +4,6 @@
   // form.js
   var adForm = document.querySelector('.ad-form');
   var fieldInputs = document.querySelectorAll('fieldset');
-
   var adFormReset = document.querySelector('.ad-form__reset');
   var mapFilters = document.querySelectorAll('.map__filter');
   var mapFeatureForm = document.querySelector('.map__features');
@@ -124,7 +123,10 @@
 
 
   adForm.addEventListener('submit', function (evt) {
+    console.log(adForm)
     window.save(new FormData(adForm), function () {
+
+
     });
     evt.preventDefault();
     pageReset();

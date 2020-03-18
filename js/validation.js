@@ -14,7 +14,7 @@
   var formPhotoUser = document.getElementById('avatar');
   var formImages = document.getElementById('images');
 
-  formAddress.disabled = true;
+  formAddress.setAttribute('readonly', "readonly");
   formTitle.setAttribute('min', 2);
   formTitle.setAttribute('max', 10);
   formPhotoUser.setAttribute('accept', 'image/jpeg');
