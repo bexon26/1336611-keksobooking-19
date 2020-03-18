@@ -8,7 +8,7 @@ var similarNoticeTemplate = document.querySelector('#pin')
   .content
   .querySelector('.map__pin');
 
-
+console.log('3 и 4 проверил');
 
 // Фунция отрисовки одного объявления
 var renderNotice = function (notice) {

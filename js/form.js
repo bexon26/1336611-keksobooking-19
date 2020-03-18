@@ -77,6 +77,7 @@
     addModEvent();
   };
 
+
   // Слушатель события на пине
   var mapPins = document.querySelector('.map__pins');
   mapPins.addEventListener('click', function (evt) {
