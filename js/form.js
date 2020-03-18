@@ -9,9 +9,11 @@
   var mapFeatureForm = document.querySelector('.map__features');
   var mapFeatures = mapFeatureForm.querySelectorAll('.map__checkbox');
   var mapPinMain = document.querySelector('.map__pin--main');
+  var priceInput = document.getElementById('price');
   var topMain = Number(mapPinMain.style.top.slice(0, -2));
   var leftMain = Number(mapPinMain.style.left.slice(0, -2));
-  adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
+  var mainPinStartPosition = 'top: ' + (topMain + 225) + '; left: ' + (leftMain - 195);
+  adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
 
   var fieldPageSwitchOff = function () {
     fieldInputs.forEach(function (element) {
@@ -27,7 +29,7 @@
   var removeFormDisabled = function () {
     document.querySelector('.map').classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
+    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
     fieldInputs.forEach(function (element) {
       element.removeAttribute('disabled');
     });
@@ -52,7 +54,7 @@
   // Функция добавления слушателя на новый элемент
   function addModEvent() {
     var map = document.querySelector('.map');
-    map.addEventListener('keydown', function (evt) {
+    document.addEventListener('keydown', function (evt) {
       if (evt.key === 'Escape') {
         closeCard();
       }
@@ -69,65 +71,79 @@
     }
   };
 
+
   var filterChangeHandler = function (id) {
     // удалалени окна карточки
     closeCard();
     // показ новой карточки
     window.viewCard(id);
+    // document.querySelector('input[name="address"]')
     addModEvent();
   };
 
 
-  // Слушатель события на пине
-  var mapPins = document.querySelector('.map__pins');
-  mapPins.addEventListener('click', function (evt) {
+
+  var mapPin = document.querySelector('.map__pins');
+  var mapPinActive = function (evt) {
     if (evt.target.matches('img')) {
+      var mapPins = mapPin.querySelectorAll('.map__pin--active');
+      mapPins.forEach(function (element) {
+        element.classList.remove('map__pin--active');
+      });
+      evt.target.parentElement.classList.add('map__pin--active');
       if (evt.target.parentElement.getAttribute('id')) {
         filterChangeHandler(evt.target.parentElement.getAttribute('id'));
       }
     }
     if (evt.target.matches('button')) {
+      mapPins = mapPin.querySelectorAll('.map__pin--active');
+      mapPins.forEach(function (element) {
+        element.classList.remove('map__pin--active');
+      });
+      evt.target.classList.add('map__pin--active');
       if (evt.target.id) {
         filterChangeHandler(evt.target.id);
       }
     }
+  };
+
+// Слушатель события на пине
+  mapPin.addEventListener('click', function (evt) {
+    mapPinActive(evt);
   });
 
   var pageReset = function () {
-
+    adForm.reset();
     document.querySelector('.map').classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
-    adForm.reset();
+
     window.filter.removePins();
     fieldPageSwitchOff();
     mapFeatures.forEach(function (element) {
       element.checked = false;
     });
     mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
-    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
-    adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
+    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
     closeCard();
-
+    priceInput.setAttribute('placeholder', '5000');
   };
 
   var fieldReset = function () {
     adForm.reset();
+    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
     window.filter.removePins();
     window.viewPin(window.notices);
     mapFeatures.forEach(function (element) {
       element.checked = false;
     });
     mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
-    adForm.querySelector('input[name="address"]').value = 'top: ' + (topMain + 70) + '; left: ' + (leftMain + 25);
     closeCard();
+    priceInput.setAttribute('placeholder', '5000');
   };
 
 
   adForm.addEventListener('submit', function (evt) {
-    console.log(adForm)
     window.save(new FormData(adForm), function () {
-
-
     });
     evt.preventDefault();
     pageReset();
