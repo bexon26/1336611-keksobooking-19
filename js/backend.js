@@ -1,6 +1,7 @@
 'use strict';
 // Модуль backend.js
-
+const TIMEOUT = 10000;
+const CODESUCCESS = 200;
 
 (function () {
   var URL = 'https://js.dump.academy/keksobooking';
@@ -9,7 +10,7 @@
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
       onload(xhr.response);
-      if (xhr.status === 200) {
+      if (xhr.status === CODESUCCESS) {
         window.error.viewSucces();
       } else {
         window.error.viewError();
@@ -29,7 +30,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === CODESUCCESS) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -43,19 +44,20 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000; // 10s
+    xhr.timeout = TIMEOUT; // 10s
     xhr.open('GET', URL);
     xhr.send();
   };
 
 
-
+  const ERRORMESSAGELEFT = 0;
+  const ERRORMESSAGETOP = 0;
   var errorHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     node.style.position = 'absolute';
-    node.style.left = 0;
-    node.style.right = 0;
+    node.style.left = ERRORMESSAGELEFT;
+    node.style.right = ERRORMESSAGETOP;
     node.style.fontSize = '30px';
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);

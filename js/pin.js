@@ -1,5 +1,6 @@
 'use strict';
 // модуль pin.js
+const MAXPINMAP = 7;
 (function () {
   // Находим блок куда будем вставлять пины
   var similarListElement = document.querySelector('.map__pins');
@@ -23,7 +24,7 @@
     var noticeElement = similarNoticeTemplate.cloneNode(true);
     noticeElement.style = 'left:' + notice.location.x + 'px; ' + 'top:' + notice.location.y + 'px;';
     noticeElement.setAttribute('id', notice.id);
-    var imgNotice = noticeElement.children[0];
+    var imgNotice = noticeElement.firstChild;
     imgNotice.src = notice.author.avatar;
     imgNotice.alt = notice.offer.title;
     noticeElement.setAttribute('tabindex', 0);
@@ -36,7 +37,7 @@
     if (noticeArrays === undefined) {
       noticeArrays = notices;
     }
-    for (var n = 0; n < noticeArrays.length && n < 5; n++) {
+    for (var n = 0; n < noticeArrays.length && n < MAXPINMAP; n++) {
       fragment.appendChild(renderNotice(noticeArrays[n]));
     }
     similarListElement.appendChild(fragment);
