@@ -36,8 +36,8 @@
         pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
       }
 
-      if ((pinMain.offsetLeft + 51 - shift.x) >= window.innerWidth) {
-        pinMain.style.left = (window.innerWidth - 51) + 'px';
+      if ((pinMain.offsetLeft + 31 - shift.x) >= map.offsetWidth) {
+        pinMain.style.left = (map.offsetWidth - 31) + 'px';
       } else if ((pinMain.offsetLeft - shift.x) < -31) {
         pinMain.style.left = '-31px';
         pinLeftAsolute = -31;

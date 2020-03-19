@@ -67,7 +67,7 @@
       } else {
         typeRooms = dataFilterTipes[2].room;
       }
-      return it.offer.rooms == typeRooms;
+      return it.offer.rooms === +typeRooms;
     });
 
     var sameGuestHouses = sameRoomsHouses.filter(function (it) {
@@ -76,7 +76,7 @@
       } else {
         typeGuest = dataFilterTipes[3].guest;
       }
-      return it.offer.guests == typeGuest;
+      return it.offer.guests === +typeGuest;
     });
 
     var sameFilterHouses = sameGuestHouses.filter(function (it) {
@@ -97,12 +97,12 @@
       }
       return false;
     });
-    window.viewPin(sameFilterHouses);
+    window.pin.viewPin(sameFilterHouses);
   };
 
   mapType.addEventListener('change', function () {
     dataFilterTipes[0].type = mapType.value;
-    window.filterMap();
+    window.pin.filterMap();
   });
   mapPrice.addEventListener('change', function () {
     switch (mapPrice.value) {
@@ -119,15 +119,15 @@
         dataFilterTipes[1].price = 'high';
         break;
     }
-    window.filterMap();
+    window.pin.filterMap();
   });
   mapRooms.addEventListener('change', function () {
     dataFilterTipes[2].room = mapRooms.value;
-    window.filterMap();
+    window.pin.filterMap();
   });
   mapGuests.addEventListener('change', function () {
     dataFilterTipes[3].guest = mapGuests.value;
-    window.filterMap();
+    window.pin.filterMap();
   });
 
   mapFeatureForm.addEventListener('click', function (evt) {
@@ -182,7 +182,7 @@
             break;
         }
       }
-      window.filterMap();
+      window.pin.filterMap();
     }
   });
 

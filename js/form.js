@@ -12,7 +12,7 @@
   var priceInput = document.getElementById('price');
   var topMain = Number(mapPinMain.style.top.slice(0, -2));
   var leftMain = Number(mapPinMain.style.left.slice(0, -2));
-  var mainPinStartPosition = 'top: ' + (topMain + 225) + '; left: ' + (leftMain - 195);
+  var mainPinStartPosition = 'left:' + (leftMain + 30) + '; top:' + (topMain + 0) + ';';
   adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
 
   var fieldPageSwitchOff = function () {
@@ -41,7 +41,7 @@
   mapPinMain.addEventListener('mousedown', function (evt) {
     if (evt.button === 0) {
       removeFormDisabled();
-      window.viewPin(window.notices);
+      window.pin.viewPin();
     }
   });
 
@@ -77,29 +77,29 @@
     closeCard();
     // показ новой карточки
     window.viewCard(id);
-    // document.querySelector('input[name="address"]')
     addModEvent();
   };
 
 
-
   var mapPin = document.querySelector('.map__pins');
+
+  var removeActionPin = function () {
+    var mapPins = mapPin.querySelectorAll('.map__pin--active');
+    mapPins.forEach(function (element) {
+      element.classList.remove('map__pin--active');
+    });
+  };
+
   var mapPinActive = function (evt) {
     if (evt.target.matches('img')) {
-      var mapPins = mapPin.querySelectorAll('.map__pin--active');
-      mapPins.forEach(function (element) {
-        element.classList.remove('map__pin--active');
-      });
+      removeActionPin();
       evt.target.parentElement.classList.add('map__pin--active');
       if (evt.target.parentElement.getAttribute('id')) {
         filterChangeHandler(evt.target.parentElement.getAttribute('id'));
       }
     }
     if (evt.target.matches('button')) {
-      mapPins = mapPin.querySelectorAll('.map__pin--active');
-      mapPins.forEach(function (element) {
-        element.classList.remove('map__pin--active');
-      });
+      removeActionPin();
       evt.target.classList.add('map__pin--active');
       if (evt.target.id) {
         filterChangeHandler(evt.target.id);
@@ -107,51 +107,45 @@
     }
   };
 
-// Слушатель события на пине
+  // Слушатель события на пине
   mapPin.addEventListener('click', function (evt) {
     mapPinActive(evt);
   });
 
-  var pageReset = function () {
+  var defaultReset = function (evt) {
+    evt.preventDefault();
     adForm.reset();
+    window.filter.removePins();
+    mapFeatures.forEach(function (element) {
+      element.checked = false;
+    });
+    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
+    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
+    closeCard();
+    priceInput.setAttribute('placeholder', '5000');
+  };
+
+  var pageReset = function (evt) {
+    defaultReset(evt);
     document.querySelector('.map').classList.add('map--faded');
     adForm.classList.add('ad-form--disabled');
-
-    window.filter.removePins();
     fieldPageSwitchOff();
-    mapFeatures.forEach(function (element) {
-      element.checked = false;
-    });
-    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
-    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
-    closeCard();
-    priceInput.setAttribute('placeholder', '5000');
   };
 
-  var fieldReset = function () {
-    adForm.reset();
+  var fieldReset = function (evt) {
+    defaultReset(evt);
     adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
-    window.filter.removePins();
-    window.viewPin(window.notices);
-    mapFeatures.forEach(function (element) {
-      element.checked = false;
-    });
-    mapPinMain.setAttribute('style', 'left: 570px; top: 375px;');
-    closeCard();
-    priceInput.setAttribute('placeholder', '5000');
+    window.pin.viewPin();
   };
-
 
   adForm.addEventListener('submit', function (evt) {
     window.save(new FormData(adForm), function () {
     });
-    evt.preventDefault();
-    pageReset();
+    pageReset(evt);
   });
 
   adFormReset.addEventListener('click', function (evt) {
-    evt.preventDefault();
-    fieldReset();
+    fieldReset(evt);
   });
 
   window.form = {
