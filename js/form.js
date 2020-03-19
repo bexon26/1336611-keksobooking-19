@@ -115,6 +115,7 @@
   var defaultReset = function (evt) {
     evt.preventDefault();
     adForm.reset();
+    window.avatar.imageReset();
     window.filter.removePins();
     mapFeatures.forEach(function (element) {
       element.checked = false;
