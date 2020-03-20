@@ -57,8 +57,8 @@
         features[i].classList.add('visually-hidden');
       }
 
-      for (var i = 0; i < card.offer.features.length; i++) {
-        switch (card.offer.features[i]) {
+      for (var j = 0; j < card.offer.features.length; j++) {
+        switch (card.offer.features[j]) {
           case 'wifi':
             var feature = cardElement.querySelector('.popup__feature--wifi');
             feature.classList.remove('visually-hidden');
@@ -108,12 +108,12 @@
     var photos = cardElement.querySelector('.popup__photos');
 
     if (card.offer.photos.length) {
-      for (var i = 0; i < card.offer.photos.length; i++) {
-        if (!i) {
+      for (var k = 0; k < card.offer.photos.length; k++) {
+        if (!k) {
           photos.children[0].src = card.offer.photos[i];
         } else {
           var photo = photos.children[0].cloneNode(true);
-          photo.src = card.offer.photos[i];
+          photo.src = card.offer.photos[k];
           photos.appendChild(photo);
         }
       }
