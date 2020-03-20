@@ -2,7 +2,7 @@
 // модуль pin.js
 
 (function () {
-  const MAXPINMAP = 5;
+  var MAXPINMAP = 5;
   // Находим блок куда будем вставлять пины
   var similarListElement = document.querySelector('.map__pins');
   // Находим блок куда будем вставлять блок с информацией

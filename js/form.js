@@ -2,8 +2,8 @@
 
 (function () {
   // form.js
-  const HALFPINWIDTH = 32;
-  const HALFPINHEIGHT = 32;
+  var HALFPINWIDTH = 32;
+  var HALFPINHEIGHT = 32;
   var adForm = document.querySelector('.ad-form');
   var fieldInputs = document.querySelectorAll('fieldset');
   var adFormReset = document.querySelector('.ad-form__reset');

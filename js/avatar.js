@@ -12,7 +12,7 @@
   var imagePreview = document.querySelector('.ad-form__photo-container');
   var imageBlock = imagePreview.querySelector('.ad-form__photo');
 
-  avatarInput.addEventListener('change', function (evt) {
+  avatarInput.addEventListener('change', function () {
     var file = avatarInput.files[0];
     var fileName = file.name.toLowerCase();
     var matches = FILE_TYPES.some(function (it) {

@@ -1,10 +1,10 @@
 'use strict';
- // move.js
+// move.js
 (function () {
-  const DOWN = 630;
-  const TOP = 130;
-  const HALFPINWIDTH = 32;
-  const PINHEIGHT = 82;
+  var DOWN = 630;
+  var TOP = 130;
+  var HALFPINWIDTH = 32;
+  var PINHEIGHT = 82;
 
   var map = document.querySelector('.map');
   var pinMain = map.querySelector('.map__pin--main');
@@ -45,10 +45,10 @@
         pinMain.style.left = pinLeftAsolute + 'px';
 
       } else if ((pinMain.offsetLeft - shift.x) < -HALFPINWIDTH) {
-        pinMain.style.left = - HALFPINWIDTH + 'px';
+        pinMain.style.left = -HALFPINWIDTH + 'px';
         pinLeftAsolute = -HALFPINWIDTH;
       } else {
-          pinLeftAsolute = pinMain.offsetLeft - shift.x;
+        pinLeftAsolute = pinMain.offsetLeft - shift.x;
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       }
       formAddress.value = 'left:' + (pinLeftAsolute + HALFPINWIDTH) + '; ' + 'top:' + (pinMain.offsetTop - shift.y + PINHEIGHT) + ';';
