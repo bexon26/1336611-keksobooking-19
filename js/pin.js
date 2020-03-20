@@ -12,7 +12,7 @@
   .querySelector('.map__pin');
 
   // Загрузка данных
- var notices = [];
+  var notices = [];
   window.load.load(function (data) {
     notices = data;
     for (var i = 0; i < notices.length; i++) {
@@ -38,9 +38,9 @@
     if (noticeArrays === undefined) {
       noticeArrays = notices;
     }
-    noticeArrays = noticeArrays.filter(function (it){
+    noticeArrays = noticeArrays.filter(function (it) {
       return it.offer;
-    })
+    });
     for (var n = 0; n < noticeArrays.length && n < MAXPINMAP; n++) {
       fragment.appendChild(renderNotice(noticeArrays[n]));
     }
@@ -61,7 +61,9 @@
 
   window.pin = {
     viewPin: viewPin,
-    filterMap: () => window.debounce(filterMap),
+    filterMap: function () {
+      return window.debounce(filterMap);
+    },
   };
 
 })();

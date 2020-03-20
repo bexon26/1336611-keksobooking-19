@@ -1,7 +1,7 @@
 'use strict';
 // Модуль backend.js
-const TIMEOUT = 10000;
-const CODESUCCESS = 200;
+var TIMEOUT = 10000;
+var CODESUCCESS = 200;
 
 (function () {
   var URL = 'https://js.dump.academy/keksobooking';
