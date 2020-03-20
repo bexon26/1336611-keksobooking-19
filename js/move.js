@@ -1,7 +1,11 @@
 'use strict';
-
+ // move.js
 (function () {
-  // move.js
+  const DOWN = 630;
+  const TOP = 130;
+  const HALFPINWIDTH = 32;
+  const PINHEIGHT = 82;
+
   var map = document.querySelector('.map');
   var pinMain = map.querySelector('.map__pin--main');
   var formAddress = document.getElementById('address');
@@ -28,25 +32,26 @@
       };
 
       var pinLeftAsolute;
-      if ((pinMain.offsetTop - shift.y) > 630) {
+      if ((pinMain.offsetTop - shift.y) > DOWN) {
         pinMain.style.top = '630px';
-      } else if ((pinMain.offsetTop - shift.y) < 130) {
+      } else if ((pinMain.offsetTop - shift.y) < TOP) {
         pinMain.style.top = '130px';
       } else {
         pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
       }
 
-      if ((pinMain.offsetLeft + 51 - shift.x) >= window.innerWidth) {
-        pinMain.style.left = (window.innerWidth - 51) + 'px';
-      } else if ((pinMain.offsetLeft - shift.x) < -31) {
-        pinMain.style.left = '-31px';
-        pinLeftAsolute = -31;
+      if ((pinMain.offsetLeft + HALFPINWIDTH - shift.x) >= map.offsetWidth) {
+        pinLeftAsolute = (map.offsetWidth - HALFPINWIDTH);
+        pinMain.style.left = pinLeftAsolute + 'px';
+
+      } else if ((pinMain.offsetLeft - shift.x) < -HALFPINWIDTH) {
+        pinMain.style.left = - HALFPINWIDTH + 'px';
+        pinLeftAsolute = -HALFPINWIDTH;
       } else {
-        pinLeftAsolute = pinMain.offsetLeft - shift.x;
+          pinLeftAsolute = pinMain.offsetLeft - shift.x;
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       }
-      formAddress.value = 'left:' + (pinLeftAsolute + 31) + '; ' + 'top:' + (pinMain.offsetTop - shift.y) + ';';
-
+      formAddress.value = 'left:' + (pinLeftAsolute + HALFPINWIDTH) + '; ' + 'top:' + (pinMain.offsetTop - shift.y + PINHEIGHT) + ';';
     };
 
     var onMouseUp = function (upEvt) {

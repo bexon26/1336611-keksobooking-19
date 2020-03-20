@@ -11,13 +11,10 @@
   var formAddress = document.getElementById('address');
   var formTimeIn = document.getElementById('timein');
   var formTimeOut = document.getElementById('timeout');
-  var formPhotoUser = document.getElementById('avatar');
-  var formImages = document.getElementById('images');
 
+  formAddress.setAttribute('readonly', 'readonly');
   formTitle.setAttribute('min', 2);
   formTitle.setAttribute('max', 10);
-  formPhotoUser.setAttribute('accept', 'image/jpeg');
-  formImages.setAttribute('accept', 'image/jpeg');
 
   // Валидация комнат
   var validateRoom = function () {
