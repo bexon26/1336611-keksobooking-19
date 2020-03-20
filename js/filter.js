@@ -31,10 +31,7 @@
   };
 
   var updatePins = function (notices) {
-
-
     window.form.closeCard();
-
 
     removePins();
     var sameTypeHouses = notices.filter(function (it) {

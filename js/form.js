@@ -2,6 +2,8 @@
 
 (function () {
   // form.js
+  const HALFPINWIDTH = 32;
+  const HALFPINHEIGHT = 32;
   var adForm = document.querySelector('.ad-form');
   var fieldInputs = document.querySelectorAll('fieldset');
   var adFormReset = document.querySelector('.ad-form__reset');
@@ -12,7 +14,7 @@
   var priceInput = document.getElementById('price');
   var topMain = Number(mapPinMain.style.top.slice(0, -2));
   var leftMain = Number(mapPinMain.style.left.slice(0, -2));
-  var mainPinStartPosition = 'left:' + (leftMain + 30) + '; top:' + (topMain + 0) + ';';
+  var mainPinStartPosition = 'left:' + (leftMain + HALFPINWIDTH) + '; top:' + (topMain + HALFPINHEIGHT) + ';';
   adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
 
   var fieldPageSwitchOff = function () {
@@ -29,7 +31,7 @@
   var removeFormDisabled = function () {
     document.querySelector('.map').classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
+    adForm.querySelector('input[name="address"]').value = 'left:' + (leftMain + HALFPINWIDTH) + '; top:' + (topMain + HALFPINHEIGHT) + ';';
     fieldInputs.forEach(function (element) {
       element.removeAttribute('disabled');
     });
@@ -39,16 +41,23 @@
   };
 
   mapPinMain.addEventListener('mousedown', function (evt) {
-    if (evt.button === 0) {
-      removeFormDisabled();
-      window.pin.viewPin();
+    if (adForm.getAttribute('class') === 'ad-form ad-form--disabled') {
+      if (evt.button === 0) {
+        removeFormDisabled();
+        window.pin.viewPin();
+      }
     }
+
+
   });
 
   mapPinMain.addEventListener('keydown', function (evt) {
-    if (evt.key === 'Enter') {
-      removeFormDisabled();
+    if (adForm.getAttribute('class') === 'ad-form ad-form--disabled') {
+      if (evt.key === 'Enter') {
+        removeFormDisabled();
+      }
     }
+
   });
 
   // Функция добавления слушателя на новый элемент

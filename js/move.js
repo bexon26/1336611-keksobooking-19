@@ -3,7 +3,8 @@
 (function () {
   const DOWN = 630;
   const TOP = 130;
-  var HALFPINWIDTH = 32;
+  const HALFPINWIDTH = 32;
+  const PINHEIGHT = 82;
 
   var map = document.querySelector('.map');
   var pinMain = map.querySelector('.map__pin--main');
@@ -50,7 +51,7 @@
           pinLeftAsolute = pinMain.offsetLeft - shift.x;
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       }
-      formAddress.value = 'left:' + (pinLeftAsolute + HALFPINWIDTH) + '; ' + 'top:' + (pinMain.offsetTop - shift.y) + ';';
+      formAddress.value = 'left:' + (pinLeftAsolute + HALFPINWIDTH) + '; ' + 'top:' + (pinMain.offsetTop - shift.y + PINHEIGHT) + ';';
     };
 
     var onMouseUp = function (upEvt) {

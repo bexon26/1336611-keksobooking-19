@@ -1,7 +1,8 @@
 'use strict';
 // модуль pin.js
-const MAXPINMAP = 7;
+
 (function () {
+  const MAXPINMAP = 5;
   // Находим блок куда будем вставлять пины
   var similarListElement = document.querySelector('.map__pins');
   // Находим блок куда будем вставлять блок с информацией
@@ -37,11 +38,15 @@ const MAXPINMAP = 7;
     if (noticeArrays === undefined) {
       noticeArrays = notices;
     }
+    noticeArrays = noticeArrays.filter(function (it){
+      return it.offer;
+    })
     for (var n = 0; n < noticeArrays.length && n < MAXPINMAP; n++) {
       fragment.appendChild(renderNotice(noticeArrays[n]));
     }
     similarListElement.appendChild(fragment);
   };
+
   // Отрисовка карточек
   window.viewCard = function (id) {
     var fragmentCard = document.createDocumentFragment();
@@ -51,12 +56,12 @@ const MAXPINMAP = 7;
   };
 
   var filterMap = function () {
-    window.filter.updatePins(notices);
+    window.debounce(window.filter.updatePins(notices));
   };
 
   window.pin = {
     viewPin: viewPin,
-    filterMap: filterMap,
+    filterMap: () => window.debounce(filterMap),
   };
 
 })();

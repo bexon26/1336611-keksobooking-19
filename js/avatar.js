@@ -36,8 +36,6 @@
     if (matches) {
       var readerHouse = new FileReader();
       readerHouse.addEventListener('load', function () {
-
-
         var newImg = document.createElement('img');
         newImg.setAttribute('src', readerHouse.result);
         newImg.setAttribute('width', '100%');
@@ -52,17 +50,14 @@
   var imageReset = function () {
     var removeBlock = imageBlock.getElementsByTagName('img');
     avatar[0].setAttribute('src', 'img/muffin-grey.svg');
-
-    for(var i = 0; i< removeBlock.length; i++){
-      imageBlock.removeChild(removeBlock[i]);
+    var countBlock = removeBlock.length;
+    for (var i = 0; i < countBlock; i++) {
+      removeBlock[0].remove();
     }
-
-
   };
 
   window.avatar = {
     imageReset: imageReset,
-    imageBlock
   };
 
 })();
