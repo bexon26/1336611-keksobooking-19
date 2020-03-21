@@ -11,7 +11,6 @@
 
   var imagePreview = document.querySelector('.ad-form__photo-container');
   var imageBlock = imagePreview.querySelector('.ad-form__photo');
-//imageInput.setAttribute('multiple', 'true');
 
   avatarInput.addEventListener('change', function () {
     var file = avatarInput.files[0];
@@ -30,8 +29,7 @@
 
   imageInput.addEventListener('change', function () {
     var file = imageInput.files[0];
-    console.log(imageInput.files);
-   // imageInput.files[1] = file;
+
     var fileName = file.name.toLowerCase();
     var matches = FILE_TYPES.some(function (it) {
       return fileName.endsWith(it);
@@ -44,12 +42,9 @@
         newImg.setAttribute('width', '100%');
         newImg.setAttribute('height', '100%');
         imageBlock.appendChild(newImg);
-      // imageInput.append(file);
       });
       readerHouse.readAsDataURL(file);
     }
-
-
   });
 
   var imageReset = function () {
