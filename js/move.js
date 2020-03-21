@@ -33,11 +33,11 @@
 
       var pinLeftAsolute;
 
-      // eslint-disable-next-line no-nested-ternary
-      pinMain.style.top = (pinMain.offsetTop - shift.y + PIN_HEIGHT) > DOWN ? DOWN - PIN_HEIGHT + 'px' :
-        (pinMain.offsetTop - shift.y + PIN_HEIGHT) < TOP ? (TOP - PIN_HEIGHT) + 'px' :
-          (pinMain.offsetTop - shift.y) + 'px';
-
+      if ((pinMain.offsetTop - shift.y + PIN_HEIGHT) > DOWN) {
+        pinMain.style.top = DOWN - PIN_HEIGHT + 'px';
+      } else {
+        pinMain.style.top = (pinMain.offsetTop - shift.y + PIN_HEIGHT) < TOP ? TOP - PIN_HEIGHT + 'px' : (pinMain.offsetTop - shift.y) + 'px';
+      }
 
       if ((pinMain.offsetLeft + HALF_PIN_WIDTH - shift.x) >= map.offsetWidth) {
         pinLeftAsolute = (map.offsetWidth - HALF_PIN_WIDTH);
