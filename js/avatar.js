@@ -2,7 +2,6 @@
 // main.js
 (function () {
   var FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
   var avatarInput = document.getElementById('avatar');
   var imageInput = document.getElementById('images');
 
@@ -27,6 +26,7 @@
     }
   });
 
+  window.filesQueue = [];
   imageInput.addEventListener('change', function () {
     var file = imageInput.files[0];
 
@@ -37,6 +37,7 @@
     if (matches) {
       var readerHouse = new FileReader();
       readerHouse.addEventListener('load', function () {
+        window.filesQueue.push(readerHouse.result);
         var newImg = document.createElement('img');
         newImg.setAttribute('src', readerHouse.result);
         newImg.setAttribute('width', '100%');
@@ -57,7 +58,7 @@
   };
 
   window.avatar = {
-    imageReset: imageReset,
+    imageReset: imageReset
   };
 
 })();

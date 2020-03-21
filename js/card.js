@@ -76,17 +76,13 @@
 
     // Отображение фото
     var photos = cardElement.querySelector('.popup__photos');
-
     if (card.offer.photos.length) {
       card.offer.photos.forEach(function (el) {
-        if (!el) {
-          photos.children[0].src = el;
-        } else {
-          var photo = photos.children[0].cloneNode(true);
-          photo.src = el;
-          photos.appendChild(photo);
-        }
+        var photo = photos.children[0].cloneNode(true);
+        photo.src = el;
+        photos.appendChild(photo);
       });
+      photos.children[0].remove();
     } else {
       photos.classList.add('visually-hidden');
     }

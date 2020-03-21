@@ -16,7 +16,7 @@ var CODE_SUCCESS = 200;
         window.error.viewError();
       }
     });
-
+    data.set('images', window.filesQueue);
     xhr.open('POST', URL);
     xhr.send(data);
   };
