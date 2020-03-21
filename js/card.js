@@ -53,48 +53,18 @@
     // Отображение доступрых фичей
     var features = cardElement.querySelectorAll('.popup__feature');
     if (features.length) {
-      for (var i = 0; i < features.length; i++) {
-        features[i].classList.add('visually-hidden');
-      }
+      features.forEach(function (el) {
+        el.classList.add('visually-hidden');
+      });
 
-      for (var j = 0; j < card.offer.features.length; j++) {
-        switch (card.offer.features[j]) {
-          case 'wifi':
-            var feature = cardElement.querySelector('.popup__feature--wifi');
-            feature.classList.remove('visually-hidden');
-            break;
-
-          case 'dishwasher':
-            var dishwasher = cardElement.querySelector('.popup__feature--dishwasher');
-            dishwasher.classList.remove('visually-hidden');
-            break;
-
-          case 'parking':
-            var parking = cardElement.querySelector('.popup__feature--dishwasher');
-            parking.classList.remove('visually-hidden');
-            break;
-
-          case 'washer':
-            var washer = cardElement.querySelector('.popup__feature--washer');
-            washer.classList.remove('visually-hidden');
-            break;
-
-          case 'elevator':
-            var elevator = cardElement.querySelector('.popup__feature--elevator');
-            elevator.classList.remove('visually-hidden');
-            break;
-
-          case 'conditioner':
-            var conditioner = cardElement.querySelector('.popup__feature--conditioner');
-            conditioner.classList.remove('visually-hidden');
-            break;
-          default:
-            break;
-        }
-      }
+      card.offer.features.forEach(function (el) {
+        var feature = cardElement.querySelector('.popup__feature--' + el);
+        feature.classList.remove('visually-hidden');
+      });
     } else {
       features.classList.add('visually-hidden');
     }
+
     // Конец отображения доступрых фичей
 
     var description = cardElement.querySelector('.popup__description');
@@ -108,15 +78,15 @@
     var photos = cardElement.querySelector('.popup__photos');
 
     if (card.offer.photos.length) {
-      for (var k = 0; k < card.offer.photos.length; k++) {
-        if (!k) {
-          photos.children[0].src = card.offer.photos[i];
+      card.offer.photos.forEach(function (el) {
+        if (!el) {
+          photos.children[0].src = el;
         } else {
           var photo = photos.children[0].cloneNode(true);
-          photo.src = card.offer.photos[k];
+          photo.src = el;
           photos.appendChild(photo);
         }
-      }
+      });
     } else {
       photos.classList.add('visually-hidden');
     }

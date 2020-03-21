@@ -1,10 +1,11 @@
+/* eslint-disable no-nested-ternary */
 'use strict';
 // move.js
 (function () {
   var DOWN = 630;
   var TOP = 130;
-  var HALFPINWIDTH = 32;
-  var PINHEIGHT = 82;
+  var HALF_PIN_WIDTH = 32;
+  var PIN_HEIGHT = 82;
 
   var map = document.querySelector('.map');
   var pinMain = map.querySelector('.map__pin--main');
@@ -32,26 +33,24 @@
       };
 
       var pinLeftAsolute;
-      if ((pinMain.offsetTop - shift.y) > DOWN) {
-        pinMain.style.top = '630px';
-      } else if ((pinMain.offsetTop - shift.y) < TOP) {
-        pinMain.style.top = '130px';
-      } else {
-        pinMain.style.top = (pinMain.offsetTop - shift.y) + 'px';
-      }
 
-      if ((pinMain.offsetLeft + HALFPINWIDTH - shift.x) >= map.offsetWidth) {
-        pinLeftAsolute = (map.offsetWidth - HALFPINWIDTH);
+      pinMain.style.top = (pinMain.offsetTop - shift.y + PIN_HEIGHT) > DOWN ? DOWN - PIN_HEIGHT + 'px' :
+        (pinMain.offsetTop - shift.y + PIN_HEIGHT) < TOP ? (TOP - PIN_HEIGHT) + 'px' :
+          (pinMain.offsetTop - shift.y) + 'px';
+
+
+      if ((pinMain.offsetLeft + HALF_PIN_WIDTH - shift.x) >= map.offsetWidth) {
+        pinLeftAsolute = (map.offsetWidth - HALF_PIN_WIDTH);
         pinMain.style.left = pinLeftAsolute + 'px';
 
-      } else if ((pinMain.offsetLeft - shift.x) < -HALFPINWIDTH) {
-        pinMain.style.left = -HALFPINWIDTH + 'px';
-        pinLeftAsolute = -HALFPINWIDTH;
+      } else if ((pinMain.offsetLeft - shift.x) < -HALF_PIN_WIDTH) {
+        pinMain.style.left = -HALF_PIN_WIDTH + 'px';
+        pinLeftAsolute = -HALF_PIN_WIDTH;
       } else {
         pinLeftAsolute = pinMain.offsetLeft - shift.x;
         pinMain.style.left = (pinMain.offsetLeft - shift.x) + 'px';
       }
-      formAddress.value = 'left:' + (pinLeftAsolute + HALFPINWIDTH) + '; ' + 'top:' + (pinMain.offsetTop - shift.y + PINHEIGHT) + ';';
+      formAddress.value = (pinLeftAsolute + HALF_PIN_WIDTH) + ', ' + (pinMain.offsetTop - shift.y + PIN_HEIGHT);
     };
 
     var onMouseUp = function (upEvt) {

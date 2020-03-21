@@ -1,30 +1,12 @@
 'use strict';
-// Модуль backend.js
+// Модуль load.js
+
 var TIMEOUT = 10000;
-var CODESUCCESS = 200;
+var CODE_SUCCESS = 200;
+var ERROR_MESSAGE_LEFT = 0;
+var ERROR_MESSAGE_TOP = 0;
 
 (function () {
-  var URL = 'https://js.dump.academy/keksobooking';
-  window.save = function (data, onload) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.addEventListener('load', function () {
-      onload(xhr.response);
-      if (xhr.status === CODESUCCESS) {
-        window.error.viewSucces();
-      } else {
-        window.error.viewError();
-      }
-    });
-
-    xhr.open('POST', URL);
-    xhr.send(data);
-  };
-})();
-
-(function () {
-  var ERRORMESSAGELEFT = 0;
-  var ERRORMESSAGETOP = 0;
 
   var URL = 'https://js.dump.academy/keksobooking/data';
   var load = function (onLoad, onError) {
@@ -32,7 +14,7 @@ var CODESUCCESS = 200;
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === CODESUCCESS) {
+      if (xhr.status === CODE_SUCCESS) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -55,8 +37,8 @@ var CODESUCCESS = 200;
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     node.style.position = 'absolute';
-    node.style.left = ERRORMESSAGELEFT;
-    node.style.right = ERRORMESSAGETOP;
+    node.style.left = ERROR_MESSAGE_LEFT;
+    node.style.right = ERROR_MESSAGE_TOP;
     node.style.fontSize = '30px';
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);

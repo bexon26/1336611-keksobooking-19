@@ -2,7 +2,9 @@
 // модуль pin.js
 
 (function () {
-  var MAXPINMAP = 5;
+  var MAX_PIN_MAP = 5;
+  var HALF_PIN_WIDTH = 25;
+  var PIN_HEIGHT = 70;
   // Находим блок куда будем вставлять пины
   var similarListElement = document.querySelector('.map__pins');
   // Находим блок куда будем вставлять блок с информацией
@@ -23,7 +25,7 @@
   // Фунция отрисовки одного объявления
   var renderNotice = function (notice) {
     var noticeElement = similarNoticeTemplate.cloneNode(true);
-    noticeElement.style = 'left:' + notice.location.x + 'px; ' + 'top:' + notice.location.y + 'px;';
+    noticeElement.style = 'left:' + (notice.location.x - HALF_PIN_WIDTH) + 'px; ' + 'top:' + (notice.location.y - PIN_HEIGHT) + 'px;';
     noticeElement.setAttribute('id', notice.id);
     var imgNotice = noticeElement.firstChild;
     imgNotice.src = notice.author.avatar;
@@ -35,13 +37,15 @@
   // отрисовка пинов
   var viewPin = function (noticeArrays) {
     var fragment = document.createDocumentFragment();
-    if (noticeArrays === undefined) {
-      noticeArrays = notices;
-    }
-    noticeArrays = noticeArrays.filter(function (it) {
-      return it.offer;
-    });
-    for (var n = 0; n < noticeArrays.length && n < MAXPINMAP; n++) {
+    noticeArrays = noticeArrays === undefined ?
+      notices.filter(function (it) {
+        return it.offer;
+      }) :
+      noticeArrays.filter(function (it) {
+        return it.offer;
+      });
+
+    for (var n = 0; n < noticeArrays.length && n < MAX_PIN_MAP; n++) {
       fragment.appendChild(renderNotice(noticeArrays[n]));
     }
     similarListElement.appendChild(fragment);

@@ -14,11 +14,11 @@
   var typeGuest = 'any';
   var dataFilterTipes = [];
 
-  dataFilterTipes = [{type: 'any'},
-    {price: 'any'},
-    {room: 'any'},
-    {guest: 'any'},
-    {features: []}];
+  dataFilterTipes = {type: 'any',
+    price: 'any',
+    room: 'any',
+    guest: 'any',
+    features: []};
 
   var removePins = function () {
     var mapPin = document.querySelector('.map__pins');
@@ -35,16 +35,12 @@
 
     removePins();
     var sameTypeHouses = notices.filter(function (it) {
-      if (dataFilterTipes[0].type === 'any') {
-        typeHouse = it.offer.type;
-      } else {
-        typeHouse = dataFilterTipes[0].type;
-      }
+      typeHouse = dataFilterTipes.type === 'any' ? typeHouse = it.offer.type : dataFilterTipes.type;
       return it.offer.type === typeHouse;
     });
 
     var samePriceHouses = sameTypeHouses.filter(function (it) {
-      switch (dataFilterTipes[1].price) {
+      switch (dataFilterTipes.price) {
         case 'any':
           typePrice = it.offer.price;
           break;
@@ -59,36 +55,30 @@
     });
 
     var sameRoomsHouses = samePriceHouses.filter(function (it) {
-      if (dataFilterTipes[2].room === 'any') {
-        typeRooms = it.offer.rooms;
-      } else {
-        typeRooms = dataFilterTipes[2].room;
-      }
+      typeRooms = dataFilterTipes.room === 'any' ? typeRooms = it.offer.rooms : typeRooms = dataFilterTipes.room;
       return it.offer.rooms === +typeRooms;
     });
 
     var sameGuestHouses = sameRoomsHouses.filter(function (it) {
-      if (dataFilterTipes[3].guest === 'any') {
-        typeGuest = it.offer.guests;
-      } else {
-        typeGuest = dataFilterTipes[3].guest;
-      }
+      typeRooms = dataFilterTipes.guest === 'any' ? typeGuest = it.offer.guests : typeGuest = dataFilterTipes.guest;
       return it.offer.guests === +typeGuest;
     });
 
     var sameFilterHouses = sameGuestHouses.filter(function (it) {
       var countСoincidence = 0;
       var countFeature = 0;
-      for (var j = 0; j < dataFilterTipes[4].features.length; j++) {
-        if ((dataFilterTipes[4].features[j] !== '') && (dataFilterTipes[4].features[j] !== undefined)) {
+
+      dataFilterTipes.features.forEach(function (el) {
+        if ((el !== '') && (el !== undefined)) {
           countFeature += 1;
-          for (var i = 0; i < it.offer.features.length; i++) {
-            if (dataFilterTipes[4].features[j] === it.offer.features[i]) {
+          it.offer.features.forEach(function (elem) {
+            if (el === elem) {
               countСoincidence += 1;
             }
-          }
+          });
         }
-      }
+      });
+
       if (countFeature === countСoincidence) {
         return true;
       }
@@ -98,32 +88,32 @@
   };
 
   mapType.addEventListener('change', function () {
-    dataFilterTipes[0].type = mapType.value;
+    dataFilterTipes.type = mapType.value;
     window.pin.filterMap();
   });
   mapPrice.addEventListener('change', function () {
     switch (mapPrice.value) {
       case 'any':
-        dataFilterTipes[1].price = 'any';
+        dataFilterTipes.price = 'any';
         break;
       case 'middle':
-        dataFilterTipes[1].price = 'middle';
+        dataFilterTipes.price = 'middle';
         break;
       case 'low':
-        dataFilterTipes[1].price = 'low';
+        dataFilterTipes.price = 'low';
         break;
       case 'high':
-        dataFilterTipes[1].price = 'high';
+        dataFilterTipes.price = 'high';
         break;
     }
     window.pin.filterMap();
   });
   mapRooms.addEventListener('change', function () {
-    dataFilterTipes[2].room = mapRooms.value;
+    dataFilterTipes.room = mapRooms.value;
     window.pin.filterMap();
   });
   mapGuests.addEventListener('change', function () {
-    dataFilterTipes[3].guest = mapGuests.value;
+    dataFilterTipes.guest = mapGuests.value;
     window.pin.filterMap();
   });
 
@@ -134,22 +124,22 @@
       if (selectCheckBox.checked === false) {
         switch (nameCheckBox) {
           case 'wifi':
-            dataFilterTipes[4].features[0] = nameCheckBox;
+            dataFilterTipes.features[0] = nameCheckBox;
             break;
           case 'dishwasher':
-            dataFilterTipes[4].features[1] = (nameCheckBox);
+            dataFilterTipes.features[1] = (nameCheckBox);
             break;
           case 'parking':
-            dataFilterTipes[4].features[2] = (nameCheckBox);
+            dataFilterTipes.features[2] = (nameCheckBox);
             break;
           case 'washer':
-            dataFilterTipes[4].features[3] = (nameCheckBox);
+            dataFilterTipes.features[3] = (nameCheckBox);
             break;
           case 'elevator':
-            dataFilterTipes[4].features[4] = (nameCheckBox);
+            dataFilterTipes.features[4] = (nameCheckBox);
             break;
           case 'conditioner':
-            dataFilterTipes[4].features[5] = (nameCheckBox);
+            dataFilterTipes.features[5] = (nameCheckBox);
             break;
           default:
             break;
@@ -158,22 +148,22 @@
       if (selectCheckBox.checked === true) {
         switch (nameCheckBox) {
           case 'wifi':
-            dataFilterTipes[4].features[0] = '';
+            dataFilterTipes.features[0] = '';
             break;
           case 'dishwasher':
-            dataFilterTipes[4].features[1] = '';
+            dataFilterTipes.features[1] = '';
             break;
           case 'parking':
-            dataFilterTipes[4].features[2] = '';
+            dataFilterTipes.features[2] = '';
             break;
           case 'washer':
-            dataFilterTipes[4].features[3] = '';
+            dataFilterTipes.features[3] = '';
             break;
           case 'elevator':
-            dataFilterTipes[4].features[4] = '';
+            dataFilterTipes.features[4] = '';
             break;
           case 'conditioner':
-            dataFilterTipes[4].features[5] = '';
+            dataFilterTipes.features[5] = '';
             break;
           default:
             break;

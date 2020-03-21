@@ -36,11 +36,14 @@
 
     var successBlock = mainContainer.querySelector('.success');
 
-    mainContainer.addEventListener('keydown', function (evt) {
+    document.addEventListener('keydown', function abc(evt) {
       if (evt.key === 'Escape') {
         mainContainer.removeChild(successBlock);
+        document.removeEventListener('keydown', abc);
       }
+
     });
+
     successBlock.addEventListener('click', function () {
       mainContainer.removeChild(successBlock);
     });

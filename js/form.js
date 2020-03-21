@@ -2,8 +2,8 @@
 
 (function () {
   // form.js
-  var HALFPINWIDTH = 32;
-  var HALFPINHEIGHT = 32;
+  var HALF_PIN_WIDTH = 32;
+  var HALF_PIN_HEIGHT = 32;
   var adForm = document.querySelector('.ad-form');
   var fieldInputs = document.querySelectorAll('fieldset');
   var adFormReset = document.querySelector('.ad-form__reset');
@@ -14,7 +14,7 @@
   var priceInput = document.getElementById('price');
   var topMain = Number(mapPinMain.style.top.slice(0, -2));
   var leftMain = Number(mapPinMain.style.left.slice(0, -2));
-  var mainPinStartPosition = 'left:' + (leftMain + HALFPINWIDTH) + '; top:' + (topMain + HALFPINHEIGHT) + ';';
+  var mainPinStartPosition = (leftMain + HALF_PIN_WIDTH) + ', ' + (topMain + HALF_PIN_HEIGHT);
   adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
 
   var fieldPageSwitchOff = function () {
@@ -31,7 +31,7 @@
   var removeFormDisabled = function () {
     document.querySelector('.map').classList.remove('map--faded');
     adForm.classList.remove('ad-form--disabled');
-    adForm.querySelector('input[name="address"]').value = 'left:' + (leftMain + HALFPINWIDTH) + '; top:' + (topMain + HALFPINHEIGHT) + ';';
+    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
     fieldInputs.forEach(function (element) {
       element.removeAttribute('disabled');
     });
@@ -123,6 +123,9 @@
 
   var defaultReset = function (evt) {
     evt.preventDefault();
+    document.querySelector('.map').classList.add('map--faded');
+    adForm.classList.add('ad-form--disabled');
+    fieldPageSwitchOff();
     adForm.reset();
     window.avatar.imageReset();
     window.filter.removePins();
@@ -135,27 +138,15 @@
     priceInput.setAttribute('placeholder', '5000');
   };
 
-  var pageReset = function (evt) {
-    defaultReset(evt);
-    document.querySelector('.map').classList.add('map--faded');
-    adForm.classList.add('ad-form--disabled');
-    fieldPageSwitchOff();
-  };
-
-  var fieldReset = function (evt) {
-    defaultReset(evt);
-    adForm.querySelector('input[name="address"]').value = mainPinStartPosition;
-    window.pin.viewPin();
-  };
 
   adForm.addEventListener('submit', function (evt) {
-    window.save(new FormData(adForm), function () {
+    window.save.save(new FormData(adForm), function () {
     });
-    pageReset(evt);
+    defaultReset(evt);
   });
 
   adFormReset.addEventListener('click', function (evt) {
-    fieldReset(evt);
+    defaultReset(evt);
   });
 
   window.form = {
