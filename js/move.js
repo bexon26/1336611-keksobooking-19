@@ -1,4 +1,3 @@
-/* eslint-disable no-nested-ternary */
 'use strict';
 // move.js
 (function () {
@@ -34,6 +33,7 @@
 
       var pinLeftAsolute;
 
+      // eslint-disable-next-line no-nested-ternary
       pinMain.style.top = (pinMain.offsetTop - shift.y + PIN_HEIGHT) > DOWN ? DOWN - PIN_HEIGHT + 'px' :
         (pinMain.offsetTop - shift.y + PIN_HEIGHT) < TOP ? (TOP - PIN_HEIGHT) + 'px' :
           (pinMain.offsetTop - shift.y) + 'px';
