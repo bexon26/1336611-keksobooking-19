@@ -7,7 +7,6 @@
   var renderСard = function (card) {
 
     var cardElement = similarCardTemplate.cloneNode(true);
-
     var title = cardElement.querySelector('.popup__title');
     if (card.offer.title) {
       title.textContent = card.offer.title;
@@ -65,8 +64,6 @@
       features.classList.add('visually-hidden');
     }
 
-    // Конец отображения доступрых фичей
-
     var description = cardElement.querySelector('.popup__description');
     if (card.offer.description) {
       description.textContent = card.offer.description;
@@ -89,7 +86,6 @@
 
     var avatar = cardElement.querySelector('.popup__avatar');
     avatar.setAttribute('src', card.author.avatar);
-
     return cardElement;
   };
 

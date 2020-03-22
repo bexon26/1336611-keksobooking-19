@@ -140,7 +140,7 @@
 
 
   adForm.addEventListener('submit', function (evt) {
-    window.save.save(new FormData(adForm), function () {
+    window.backend.save(new FormData(adForm), function () {
     });
     defaultReset(evt);
   });

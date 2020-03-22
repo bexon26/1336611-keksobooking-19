@@ -5,6 +5,7 @@
   var MAX_PIN_MAP = 5;
   var HALF_PIN_WIDTH = 25;
   var PIN_HEIGHT = 70;
+  var index = 0;
   // Находим блок куда будем вставлять пины
   var similarListElement = document.querySelector('.map__pins');
   // Находим блок куда будем вставлять блок с информацией
@@ -15,12 +16,13 @@
 
   // Загрузка данных
   var notices = [];
-  window.load.load(function (data) {
+  window.backend.load(function (data) {
     notices = data;
-    for (var i = 0; i < notices.length; i++) {
-      notices[i].id = i;
-    }
-  }, window.load.errorHandler);
+    notices.forEach(function (element) {
+      element.id = index;
+      index++;
+    });
+  }, window.backend.errorHandler);
 
   // Фунция отрисовки одного объявления
   var renderNotice = function (notice) {
